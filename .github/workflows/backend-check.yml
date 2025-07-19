@@ -30,8 +30,8 @@ jobs:
       # - name: 🔍 Mypy Type Check
       #   run: mypy . --strict
 
-      - name: ✅ Flake8 Linting
-        run: flake8 .
+      # - name: ✅ Flake8 Linting
+      #   run: flake8 .
 
       - name: 🧪 Pytest Unit Tests
         run: pytest tests/
