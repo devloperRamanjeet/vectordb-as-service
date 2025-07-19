@@ -1,7 +1,3 @@
-Sure thing, Ramanjeet! Here's a polished `README.md` for your backend at `./app/backend`—documenting its purpose, setup, structure, and developer workflows. It’s clean, informative, and ready for GitHub 💼✨
-
----
-
 ## 📦 Backend: VectorDB-as-a-Service
 
 This is the Flask-based multi-tenant backend powering VectorDB-as-a-Service. It handles provisioning, token generation, container orchestration via ECS, and vector operations (embed/search/delete) for tenant-isolated ChromaDB instances.
