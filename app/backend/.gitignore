@@ -1,0 +1,55 @@
+# === Python artifacts ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+
+# === ENV & Secrets ===
+.env
+.env.*
+*.secret.json
+
+# === Package and pip ===
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+# === Testing & Coverage ===
+.coverage
+htmlcov/
+.cache/
+.tox/
+.pytest_cache/
+nosetests.xml
+test-results.xml
+
+# === IDE & Editor Junk ===
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# === Lint and Type Checking ===
+.mypy_cache/
+.pytype/
+flake8.log
+
+# === CI/CD & Deployment Artifacts ===
+*.lock
+*.bak
+*.tmp
+
+# === Docker & Orchestration ===
+docker-compose.override.yml
+*.db
+*.sqlite3
+*.pid
+
+# === Logs & Debug ===
+*.log
+*.out
+debug/
+logs/
+
