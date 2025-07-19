@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: backend  # ⬅️ Change/remove if your backend is at repo root
+        working-directory: app/backend  # ⬅️ Change/remove if your backend is at repo root
 
     steps:
       - name: 🔁 Checkout Code
