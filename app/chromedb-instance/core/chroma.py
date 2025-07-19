@@ -1,22 +1,30 @@
-from core.config import TENANT_ID
-from typing import List
+import chromadb
+from chromadb.config import Settings
+from core.config import PERSIST_PATH, COLLECTION_NAME
 
-# Simulate tenant-local vector store
-VECTOR_STORE = {}
+settings = Settings(
+    is_persistent=True,
+    persist_directory=PERSIST_PATH
+)
 
-def embed_documents(docs: List[str]) -> List[str]:
-    ids = [f"{TENANT_ID}_doc_{i}" for i in range(len(docs))]
-    for doc_id, content in zip(ids, docs):
-        VECTOR_STORE[doc_id] = content
+client = chromadb.Client(settings)
+collection = client.get_or_create_collection(name=COLLECTION_NAME)
+
+def embed_documents(docs: list[str]) -> list[str]:
+    ids = [f"doc_{i}" for i in range(len(docs))]
+    collection.add(documents=docs, ids=ids)
     return ids
 
 def search_documents(query: str, top_k: int = 5):
-    return [{"id": k, "score": 1.0} for k in list(VECTOR_STORE.keys())[:top_k]]
+    results = collection.query(query_texts=[query], n_results=top_k)
+    return [
+        {"id": id_, "score": score}
+        for id_, score in zip(results["ids"][0], results["distances"][0])
+    ]
 
-def delete_documents(ids: List[str]) -> int:
-    deleted = 0
-    for doc_id in ids:
-        if doc_id in VECTOR_STORE:
-            del VECTOR_STORE[doc_id]
-            deleted += 1
-    return deleted
+def delete_documents(ids: list[str]) -> int:
+    collection.delete(ids=ids)
+    return len(ids)
+
+def get_vector_count() -> int:
+    return len(collection.get()["ids"])
