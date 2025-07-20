@@ -2,7 +2,7 @@ FROM python:3.10-slim
 
 WORKDIR /app/chromedb-instance
 
-COPY requirements.txt .
+COPY /app/chromedb-instance/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
