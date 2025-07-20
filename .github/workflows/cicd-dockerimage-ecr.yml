@@ -41,7 +41,8 @@ jobs:
         docker buildx build \
           --platform linux/amd64 \
           -t $ECR_REPO_NAME:$IMAGE_TAG \
-          -f apps/chromedb-instance/Dockerfile .
+          -f app/chromedb-instance/Dockerfile \
+          app/chromedb-instance          
 
     - name: 📦 Tag & Push to ECR
       run: |
