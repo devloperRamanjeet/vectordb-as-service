@@ -9,8 +9,12 @@ A scalable, multi-tenant vector search platform for generative AI applications�
 - Infra: AWS EC2, DynamoDB, CloudWatch
 
 ## 🧱 Architecture
+
+<img width="5094" height="4876" alt="image" src="https://github.com/user-attachments/assets/b95c1ba9-8e81-4064-8879-dc626978311a" />
+
+
 - Frontend & backend co-hosted on EC2
-- Per-tenant vector container pods on ECS
+- Per-tenant vector container pods on ECS and docer image in ECR 
 - Usage tracking + SaaS plans (Starter, Pro, Enterprise)
 
 ## 🛠 Features
