@@ -23,6 +23,7 @@ A scalable, multi-tenant vector search platform for generative AI applications�
 This project is open-source. Contributions, feedback, and collaboration are welcome!
 
 👉 💬 Join the conversation on [Discord](https://discord.gg/mTbE44sm) – we’d love to have you! 
+
 📣 Follow build progress on [LinkedIn](https://www.linkedin.com/in/ramanjeet-singh-b769ba88/)
 
 
