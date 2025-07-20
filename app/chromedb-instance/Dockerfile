@@ -1,7 +1,6 @@
-FROM --platform=linux/arm64 python:3.11-slim
+FROM python:3.10-slim
 
-
-WORKDIR /app/chromedb-instance/
+WORKDIR /app/chromedb-instance
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
