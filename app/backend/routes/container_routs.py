@@ -23,3 +23,19 @@ def stop_container(user_id):
     container.status = "stopped"
     db.session.commit()
     return jsonify({"message": "stopped"})
+
+@container_bp.route("/health", methods=["GET"])
+def health_check():
+    try:
+        # Count container records
+        container_count = Container.query.count()
+        return jsonify({
+            "status": "ok",
+            "message": "Backend is running.",
+            "containers_active": container_count
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
