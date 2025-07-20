@@ -23,7 +23,7 @@ A scalable, multi-tenant vector search platform for generative AI applications�
 This project is open-source. Contributions, feedback, and collaboration are welcome!
 
 👉 Join our Discord → `[insert invite link here]`  
-📣 Follow build progress on [LinkedIn](https://www.linkedin.com/in/YOUR_PROFILE)
+📣 Follow build progress on [[LinkedIn](www.linkedin.com/in/ramanjeet-singh-b769ba88)
 
 ## 📂 Repo Structure
 apps/ ── react-native-frontend 
