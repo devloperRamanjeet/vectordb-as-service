@@ -10,7 +10,7 @@ A scalable, multi-tenant vector search platform for generative AI applications�
 
 ## 🧱 Architecture
 - Frontend & backend co-hosted on EC2
-- Per-tenant vector container pods on AKS
+- Per-tenant vector container pods on ecs
 - Usage tracking + SaaS plans (Starter, Pro, Enterprise)
 
 ## 🛠 Features
@@ -22,7 +22,7 @@ A scalable, multi-tenant vector search platform for generative AI applications�
 ## 🌍 Community
 This project is open-source. Contributions, feedback, and collaboration are welcome!
 
-👉 Join our Discord → `[insert invite link here]`  
+👉 💬 Join the conversation on [Discord](https://discord.gg/mTbE44sm) – we’d love to have you! 
 📣 Follow build progress on [LinkedIn](https://www.linkedin.com/in/ramanjeet-singh-b769ba88/)
 
 
