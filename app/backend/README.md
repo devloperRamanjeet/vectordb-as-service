@@ -1,6 +1,5 @@
 ## 📝 `README.md`
 
-```markdown
 # Chromadb Orchestration Backend
 
 This Flask-based backend provides dynamic container orchestration for launching, managing, and monitoring Chromadb instances on AWS ECS. It serves as a middleware layer between client applications and isolated Chromadb containers, enabling multi-tenant communication with scalable architecture.
@@ -16,21 +15,21 @@ This Flask-based backend provides dynamic container orchestration for launching,
 - Push real-time status updates via **WebSocket**
 - Integrated with **Nginx** for client → backend → container routing
 
----
+
 
 ## 📦 Architecture Overview
 
-```
+
 Client ⇄ Nginx ⇄ Flask Backend ⇄ AWS ECS (chromadb-instance)
                      ↳ SQLAlchemy (User/Task mapping)
                      ↳ WebSocket (Real-time logs, errors)
-```
 
----
+
+
 
 ## 🗂 Folder Structure
 
-```
+
 backend/
 ├── app.py                  # Flask + SocketIO entry point
 ├── config.py               # AWS & ECS config
@@ -53,34 +52,11 @@ backend/
 └── utils/
     ├── port_allocator.py   # Assign safe ports
     └── logger.py           # Logging setup
-```
 
----
 
-## 🔧 Setup Instructions
 
-### 1. Clone & Install
-```bash
-git clone https://github.com/your-org/chromadb-orchestrator.git
-cd backend
-pip install -r requirements.txt
-```
 
-### 2. Configure AWS ECS
-Update `config.py` with your ECS cluster, subnet, security group, and task definition.
 
-### 3. Run Locally (Dev)
-```bash
-python app.py
-```
-
-### 4. WebSocket
-Connect from frontend using `/socket.io` and listen to:
-- `launch_progress`
-- `launch_error`
-- `status_update`
-
----
 
 ## 🧪 API Endpoints
 
