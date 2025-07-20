@@ -2,7 +2,7 @@
 
 ## 🕵️ Reporting Vulnerabilities
 
-If you discover a security vulnerability in this project, please email **security@yourdomain.com** with a detailed description. Do not create a public issue.
+If you discover a security vulnerability in this project, please email **ramanjeets21@gmail.com** with a detailed description. Do not create a public issue.
 
 ## ✅ What to Include
 
