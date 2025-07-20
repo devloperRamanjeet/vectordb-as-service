@@ -5,12 +5,12 @@ A scalable, multi-tenant vector search platform for generative AI applications�
 ## 🚀 Tech Stack
 - Frontend: React Native
 - Backend: Flask (includes SaaS orchestration)
-- Vector Engine: ChromaDB + Docker, deployed on AKS
+- Vector Engine: ChromaDB + Docker, deployed on ECS
 - Infra: AWS EC2, DynamoDB, CloudWatch
 
 ## 🧱 Architecture
 - Frontend & backend co-hosted on EC2
-- Per-tenant vector container pods on ecs
+- Per-tenant vector container pods on ECS
 - Usage tracking + SaaS plans (Starter, Pro, Enterprise)
 
 ## 🛠 Features
