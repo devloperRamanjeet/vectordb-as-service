@@ -1,6 +1,7 @@
 name: Build & Push chromadb-instance to Amazon ECR
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
