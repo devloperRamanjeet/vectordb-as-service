@@ -1,28 +1,18 @@
 from flask import Flask
-from flask_restx import Api
-
-from config.settings import load_env
-from routes.provision import provision_bp
-from routes.token import token_bp
-from routes.embed import embed_bp
-from routes.search import search_bp
-from routes.delete import delete_bp
-from routes.delete_instance import delete_instance_bp
-from routes.launch_instance import launch_instance_bp
+from flask_socketio import SocketIO
+from database.db import db
+from routes.container_routes import container_bp
+from routes.socket_routes import socket_events
 
 app = Flask(__name__)
-app.config.update(load_env())
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chromadb.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-api = Api(app, title="VectorDB SaaS API", version="v2", doc="/docs")
+db.init_app(app)
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
-# Register Blueprints
-app.register_blueprint(provision_bp, url_prefix="/api")
-app.register_blueprint(token_bp, url_prefix="/api")
-app.register_blueprint(embed_bp, url_prefix="/api")
-app.register_blueprint(search_bp, url_prefix="/api")
-app.register_blueprint(delete_bp, url_prefix="/api")
-app.register_blueprint(launch_instance_bp, url_prefix="/api")
-app.register_blueprint(delete_instance_bp, url_prefix="/api")
+app.register_blueprint(container_bp)
+socket_events(socketio)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000)

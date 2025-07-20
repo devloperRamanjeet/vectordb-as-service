@@ -1,110 +1,107 @@
-## 📦 Backend: VectorDB-as-a-Service
+## 📝 `README.md`
 
-This is the Flask-based multi-tenant backend powering VectorDB-as-a-Service. It handles provisioning, token generation, container orchestration via ECS, and vector operations (embed/search/delete) for tenant-isolated ChromaDB instances.
+```markdown
+# Chromadb Orchestration Backend
 
----
-
-### 🚀 Core Features
-
-- 🔧 Launch & terminate ECS-backed ChromaDB containers per client
-- 🔐 API key & JWT issuance for secure tenant auth
-- 📁 Full vector operation suite: `/embed`, `/search`, `/delete`
-- 🔒 Instance lifecycle management: `/launch-instance`, `/delete-instance`
-- ✅ Mypy, Flake8, and Pytest integration for code quality
-- ⚙️ DynamoDB integration for tenant metadata persistence
+This Flask-based backend provides dynamic container orchestration for launching, managing, and monitoring Chromadb instances on AWS ECS. It serves as a middleware layer between client applications and isolated Chromadb containers, enabling multi-tenant communication with scalable architecture.
 
 ---
 
-### 🗃 Folder Structure
+## 🚀 Features
+
+- Launch Chromadb instances as **Fargate tasks** via ECS
+- Track and manage container lifecycle (launch, stop, delete)
+- Assign **dynamic ports** for user isolation
+- Persist metadata in a relational database
+- Push real-time status updates via **WebSocket**
+- Integrated with **Nginx** for client → backend → container routing
+
+---
+
+## 📦 Architecture Overview
+
+```
+Client ⇄ Nginx ⇄ Flask Backend ⇄ AWS ECS (chromadb-instance)
+                     ↳ SQLAlchemy (User/Task mapping)
+                     ↳ WebSocket (Real-time logs, errors)
+```
+
+---
+
+## 🗂 Folder Structure
 
 ```
 backend/
-├── app.py                    # Entrypoint and route registration
-├── config/                   # ENV config loading
-│   └── settings.py
-├── routes/                   # Flask Blueprint routes
-│   ├── embed.py
-│   ├── search.py
-│   ├── delete.py
-│   ├── provision.py
-│   ├── token.py
-│   ├── launch_instance.py
-│   └── delete_instance.py
-├── services/                 # Business logic separation
-│   ├── chroma_service.py
-│   ├── tenant_service.py
-│   └── token_service.py
-├── utils/                    # Auth, Dynamo, secrets
-│   ├── auth.py
-│   ├── dynamo.py
-│   └── secrets.py
-├── models/                   # Request/Response typing (optional)
-├── tests/                    # Unit tests per route
+├── app.py                  # Flask + SocketIO entry point
+├── config.py               # AWS & ECS config
 ├── requirements.txt
-└── .env.example
+│
+├── routes/                 # API & WebSocket routes
+│   ├── container_routes.py
+│   └── socket_routes.py
+│
+├── services/               # ECS orchestration logic
+│   └── ecs_manager.py
+│
+├── models/                 # SQLAlchemy schemas
+│   ├── user.py
+│   └── container.py
+│
+├── database/               # DB initialization
+│   └── db.py
+│
+└── utils/
+    ├── port_allocator.py   # Assign safe ports
+    └── logger.py           # Logging setup
 ```
 
 ---
 
-### 🧪 Dev Quality Checks
+## 🔧 Setup Instructions
 
-Run locally before committing:
-
+### 1. Clone & Install
 ```bash
-mypy . --strict          # Type validation
-flake8 .                 # Linting
-pytest tests/            # Unit tests
+git clone https://github.com/your-org/chromadb-orchestrator.git
+cd backend
+pip install -r requirements.txt
 ```
 
-Or use the bundled CI workflow for PRs.
+### 2. Configure AWS ECS
+Update `config.py` with your ECS cluster, subnet, security group, and task definition.
+
+### 3. Run Locally (Dev)
+```bash
+python app.py
+```
+
+### 4. WebSocket
+Connect from frontend using `/socket.io` and listen to:
+- `launch_progress`
+- `launch_error`
+- `status_update`
 
 ---
 
-### 🔁 GitHub Actions (CI)
+## 🧪 API Endpoints
 
-Located in `.github/workflows/backend-check.yml`
-
-- Triggered on pull requests to `main`
-- Validates code with mypy, flake8, pytest
-- Requires Python 3.10 environment
-
----
-
-### ⚙️ Setup Instructions
-
-1. Clone the repo and navigate to backend:
-
-   ```bash
-   cd app/backend
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   python -m pip install --upgrade pip
-   pip install -r requirements.txt
-   ```
-
-3. Create `.env` file based on `.env.example`
-
-4. Run the app locally:
-
-   ```bash
-   python app.py
-   ```
+| Method | Endpoint                   | Description                            |
+|--------|----------------------------|----------------------------------------|
+| POST   | `/launch`                  | Launch a chromadb ECS task             |
+| POST   | `/stop/<user_id>`          | Stop user container                    |
+| DELETE | `/delete/<user_id>`        | Remove container metadata              |
+| GET    | `/status/<user_id>`        | Check running status                   |
 
 ---
 
-### 📬 API Endpoints
+## ⚖️ License
 
-| Method | Path                  | Description                        |
-|--------|-----------------------|------------------------------------|
-| POST   | `/provision`          | Create tenant metadata             |
-| POST   | `/generate-token`     | Get token + API key bundle         |
-| POST   | `/launch-instance`    | Start tenant container via ECS     |
-| POST   | `/delete-instance`    | Stop tenant ECS container          |
-| POST   | `/embed`              | Add documents to ChromaDB          |
-| POST   | `/search`             | Semantic vector search             |
-| POST   | `/delete`             | Delete vectors by ID               |
+MIT License © 2025 Ramanjeet
 
 ---
+
+## 🌐 Contributors
+
+| Name      | Role                      |
+|-----------|---------------------------|
+| Ramanjeet | Architect & Lead Developer |
+```
